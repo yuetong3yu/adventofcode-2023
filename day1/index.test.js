@@ -1,4 +1,4 @@
-import { getNumbersAtBothEnds } from './index'
+import { getNumbersAtBothEnds } from './utils.js'
 
 describe('getNumbersAtBothEnds', () => {
   test('should get correct number when only 2 digits in string', () => {
