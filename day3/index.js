@@ -3,9 +3,31 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 const __dirname = fileURLToPath(new URL('.', import.meta.url))
 
+import { numberRegex } from '../shared/index.js'
+import { isNumberAdjacentToSymbol } from './utils.js'
+
 let input = ''
 
 fs.readFile(path.join(__dirname, './input.txt'), {}, (err, data) => {
   input += data.toString()
-  console.log(input)
+  const strings = input.split('\n')
+
+  let res = 0
+  for (let x = 0; x < strings.length; x++) {
+    const str = strings[x]
+    for (let y = 0; y < str.length; y++) {
+      const char = str[y]
+      if (numberRegex.test(char)) {
+        let p = y
+        while (numberRegex.test(str[p])) p++
+        const num = str.slice(y, p)
+        if (isNumberAdjacentToSymbol(strings, x, y, p)) {
+          res += +num
+        }
+        y = p
+      }
+    }
+  }
+
+  console.log(res)
 })

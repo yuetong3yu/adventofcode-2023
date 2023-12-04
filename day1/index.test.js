@@ -29,7 +29,7 @@ describe('getNumbersAtBothEnds', () => {
     expect(getNumbersAtBothEnds('41')).toBe(41)
   })
 
-  test.only('should get 89 when given string is `lrlzz8eightmpspsk3nineseveneightnine`', () => {
+  test('should get 89 when given string is `lrlzz8eightmpspsk3nineseveneightnine`', () => {
     expect(getNumbersAtBothEnds('lrlzz8eightmpspsk3nineseveneightnine')).toBe(
       89
     )
