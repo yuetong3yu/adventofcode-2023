@@ -20,4 +20,26 @@ describe('getNumbersAtBothEnds', () => {
   test('should return correct number when given number is letters', () => {
     expect(getNumbersAtBothEnds('two1nine')).toBe(29)
   })
+
+  test('should get 77 when string is `7b`', () => {
+    expect(getNumbersAtBothEnds('7b')).toBe(77)
+  })
+
+  test('should get 41 when given string is `41`', () => {
+    expect(getNumbersAtBothEnds('41')).toBe(41)
+  })
+
+  test.only('should get 89 when given string is `lrlzz8eightmpspsk3nineseveneightnine`', () => {
+    expect(getNumbersAtBothEnds('lrlzz8eightmpspsk3nineseveneightnine')).toBe(
+      89
+    )
+  })
+
+  test('should get 11 when give string is `one`', () => {
+    expect(getNumbersAtBothEnds('one')).toBe(11)
+  })
+
+  test('should get 83 when given string is `eighthree`', () => {
+    expect(getNumbersAtBothEnds('eighthree')).toBe(83)
+  })
 })

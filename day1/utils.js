@@ -25,6 +25,8 @@ export function getNumbersAtBothEnds(str) {
   const leftNumber = _getLeftestNumber(str)
   const rightNumber = _getRightestNumber(str)
 
+  console.log(leftNumber, rightNumber)
+
   const num = +`${leftNumber}${rightNumber}`
   return Number.isNaN(num) ? 0 : num
 }
@@ -46,7 +48,7 @@ function _getLeftestNumber(str) {
 function _getRightestNumber(str) {
   const letters = []
   LETTERS_ARR.forEach((LETTER) => {
-    if (str.includes(LETTER)) letters.push([str.indexOf(LETTER), LETTER])
+    if (str.includes(LETTER)) letters.push([str.lastIndexOf(LETTER), LETTER])
   })
   letters.sort(([_i1], [_i2]) => _i2 - _i1)
   const lastDigitIndex = _getLastDigitIndex(str)
