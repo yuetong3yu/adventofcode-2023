@@ -5,6 +5,11 @@ let input = ''
 
 fs.readFile(path.join(__dirname, './input.txt'), (err, data) => {
   input += data.toString()
-
-  console.log(input)
+  const datas = input.split('\n')
 })
+
+export function getNumbersAtBothEnds(str) {
+  const numberRegex = /^\d+$/
+  let l = 0,
+    r = str.length - 1
+}
