@@ -25,8 +25,6 @@ export function getNumbersAtBothEnds(str) {
   const leftNumber = _getLeftestNumber(str)
   const rightNumber = _getRightestNumber(str)
 
-  console.log(leftNumber, rightNumber)
-
   const num = +`${leftNumber}${rightNumber}`
   return Number.isNaN(num) ? 0 : num
 }
