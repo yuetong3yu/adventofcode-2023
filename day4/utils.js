@@ -1,10 +1,5 @@
 export function getPointsFromCardString(string) {
-  const [_, dataString] = string.split(':')
-  const [awardCardsString, onHandCardsString] = dataString
-    .split('|')
-    .map((i) => i.trim())
-  const awardCards = awardCardsString.split(' ').filter((i) => !!i)
-  const onHandCards = onHandCardsString.split(' ').filter((i) => !!i)
+  const [awardCards, onHandCards] = seperateCardsFromString(string)
 
   let res = 0,
     points = 0
@@ -20,4 +15,15 @@ export function getPointsFromCardString(string) {
   }
   res += points
   return res
+}
+
+export function seperateCardsFromString(str) {
+  const [_, dataString] = string.split(':')
+  const [awardCardsString, onHandCardsString] = dataString
+    .split('|')
+    .map((i) => i.trim())
+  const awardCards = awardCardsString.split(' ').filter((i) => !!i)
+  const onHandCards = onHandCardsString.split(' ').filter((i) => !!i)
+
+  return [awardCards, onHandCards]
 }
