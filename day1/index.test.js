@@ -16,4 +16,8 @@ describe('getNumbersAtBothEnds', () => {
   test('should get the numbers at both ends when multiple digits in the string', () => {
     expect(getNumbersAtBothEnds('asd3lk4fj2ad2sl9lk')).toBe(39)
   })
+
+  test('should return correct number when given number is letters', () => {
+    expect(getNumbersAtBothEnds('two1nine')).toBe(29)
+  })
 })
