@@ -42,72 +42,122 @@ export function isNumberAdjacentToSymbol(matrix, x, y1, y2) {
 }
 
 export function getNeighboursNumbers(matrix, x, y) {
-  const length = matrix[0].length
-  const height = matrix.length
-  if (x == 0 || x == height || y == 0 || y == length) {
-    return 0
-  }
-
   const nums = []
   // top-left
-  if (numberRegex.test(matrix[x - 1][y - 1])) {
+  if (x - 1 >= 0 && y - 1 >= 0 && numberRegex.test(matrix[x - 1][y - 1])) {
     // get number of neighbor
     const number = +_getNumberOfNeighbor(matrix, x - 1, y - 1)
-    if (!nums.includes(number)) {
-      nums.push(number)
+    const numberEndingPosition = _getEndingPosition(matrix, x - 1, y - 1)
+    const numberStartPosition = _getStartPosition(matrix, x - 1, y - 1)
+    if (
+      !nums.find(
+        ([_, _startPosition, _endingPosition]) =>
+          _endingPosition == numberEndingPosition &&
+          _startPosition == numberStartPosition
+      )
+    ) {
+      nums.push([number, numberStartPosition, numberEndingPosition])
     }
   }
   // top
-  if (numberRegex.test(matrix[x - 1][y])) {
+  if (x - 1 >= 0 && numberRegex.test(matrix[x - 1][y])) {
     const number = +_getNumberOfNeighbor(matrix, x - 1, y)
-    if (!nums.includes(number)) {
-      nums.push(number)
+    const numberEndingPosition = _getEndingPosition(matrix, x - 1, y)
+    if (
+      !nums.find(
+        ([_, _endingPosition]) => _endingPosition == numberEndingPosition
+      )
+    ) {
+      nums.push([number, numberEndingPosition])
     }
   }
   // top-right
-  if (numberRegex.test(matrix[x - 1][y + 1])) {
+  if (
+    x - 1 >= 0 &&
+    y + 1 < matrix[0].length &&
+    numberRegex.test(matrix[x - 1][y + 1])
+  ) {
     const number = +_getNumberOfNeighbor(matrix, x - 1, y + 1)
-    if (!nums.includes(number)) {
-      nums.push(number)
+    const numberEndingPosition = _getEndingPosition(matrix, x - 1, y + 1)
+    if (
+      !nums.find(
+        ([_, _endingPosition]) => _endingPosition == numberEndingPosition
+      )
+    ) {
+      nums.push([number, numberEndingPosition])
     }
   }
   // left
-  if (numberRegex.test(matrix[x][y - 1])) {
+  if (y - 1 >= 0 && numberRegex.test(matrix[x][y - 1])) {
     const number = +_getNumberOfNeighbor(matrix, x, y - 1)
-    if (!nums.includes(number)) {
-      nums.push(number)
+    const numberEndingPosition = _getEndingPosition(matrix, x, y - 1)
+    if (
+      !nums.find(
+        ([_, _endingPosition]) => _endingPosition == numberEndingPosition
+      )
+    ) {
+      nums.push([number, numberEndingPosition])
     }
   }
-  // rigth
-  if (numberRegex.test(matrix[x][y + 1])) {
+  // right
+  if (y + 1 < matrix[0].length && numberRegex.test(matrix[x][y + 1])) {
     const number = +_getNumberOfNeighbor(matrix, x, y + 1)
-    if (!nums.includes(number)) {
-      nums.push(number)
+    const numberEndingPosition = _getEndingPosition(matrix, x, y + 1)
+    // console.log('find it!', number, numberEndingPosition, nums)
+    if (
+      !nums.find(
+        ([_, _endingPosition]) => _endingPosition == numberEndingPosition
+      )
+    ) {
+      nums.push([number, numberEndingPosition])
     }
   }
   // bottom-left
-  if (numberRegex.test(matrix[x + 1][y - 1])) {
+  if (
+    x + 1 < matrix.length &&
+    y - 1 >= 0 &&
+    numberRegex.test(matrix[x + 1][y - 1])
+  ) {
     const number = +_getNumberOfNeighbor(matrix, x + 1, y - 1)
-    if (!nums.includes(number)) {
-      nums.push(number)
+    const numberEndingPosition = _getEndingPosition(matrix, x + 1, y - 1)
+    if (
+      !nums.find(
+        ([_, _endingPosition]) => _endingPosition == numberEndingPosition
+      )
+    ) {
+      nums.push([number, numberEndingPosition])
     }
   }
   // bottom
-  if (numberRegex.test(matrix[x + 1][y])) {
+  if (x + 1 < matrix.length && numberRegex.test(matrix[x + 1][y])) {
     const number = +_getNumberOfNeighbor(matrix, x + 1, y)
-    if (!nums.includes(number)) {
-      nums.push(number)
+    const numberEndingPosition = _getEndingPosition(matrix, x + 1, y)
+    if (
+      !nums.find(
+        ([_, _endingPosition]) => _endingPosition == numberEndingPosition
+      )
+    ) {
+      nums.push([number, numberEndingPosition])
     }
   }
   // bottom-right
-  if (numberRegex.test(matrix[x + 1][y + 1])) {
+  if (
+    x + 1 < matrix.length &&
+    y + 1 < matrix[0].length &&
+    numberRegex.test(matrix[x + 1][y + 1])
+  ) {
     const number = +_getNumberOfNeighbor(matrix, x + 1, y + 1)
-    if (!nums.includes(number)) {
-      nums.push(number)
+    const numberEndingPosition = _getEndingPosition(matrix, x + 1, y + 1)
+    if (
+      !nums.find(
+        ([_, _endingPosition]) => _endingPosition == numberEndingPosition
+      )
+    ) {
+      nums.push([number, numberEndingPosition])
     }
   }
 
-  return nums.length === 2 ? nums[0] * nums[1] : 0
+  return nums.length === 2 ? nums[0][0] * nums[1][0] : 0
 }
 
 function _getNumberOfNeighbor(matrix, x, y) {
@@ -116,4 +166,16 @@ function _getNumberOfNeighbor(matrix, x, y) {
   while (numberRegex.test(matrix[x][l])) l--
   while (numberRegex.test(matrix[x][r])) r++
   return matrix[x].slice(l + 1, r)
+}
+
+function _getEndingPosition(matrix, x, y) {
+  let p = y
+  while (numberRegex.test(matrix[x][p])) p++
+  return p
+}
+
+function _getStartPosition(matrix, x, y) {
+  let p = y
+  while (numberRegex.test(matrix[x][p])) p--
+  return p
 }

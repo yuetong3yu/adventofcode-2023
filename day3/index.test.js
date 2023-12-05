@@ -3,14 +3,14 @@ import { isNumberAdjacentToSymbol, getNeighboursNumbers } from './utils.js'
 const mock_data = [
   '467..114..',
   '...*......',
-  '..35..633.',
-  '......#...',
-  '617*......',
+  '..35...333',
+  '......#..*',
+  '617*61.333',
   '.....+.58.',
   '..592.....',
   '......755.',
-  '...$.*....',
-  '.664.598..',
+  '...$...111',
+  '.664*.988*',
 ]
 
 describe('isNumberAdjacentToSymbol', () => {
@@ -36,7 +36,15 @@ describe('getNeighboursNumbers', () => {
     expect(getNeighboursNumbers(mock_data, 1, 3)).toBe(16345)
   })
 
-  test('should return the correct sum 2', () => {
-    expect(getNeighboursNumbers(mock_data, 8, 5)).toBe(451490)
+  test.only('should return the correct sum 2', () => {
+    expect(getNeighboursNumbers(mock_data, 3, 9)).toBe(110889)
+  })
+
+  test('should return the correct sum 3', () => {
+    expect(getNeighboursNumbers(mock_data, 4, 3)).toBe(37637)
+  })
+
+  test('should return the correct sum 4', () => {
+    expect(getNeighboursNumbers(mock_data, 9, 9)).toBe(109668)
   })
 })

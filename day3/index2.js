@@ -3,8 +3,7 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 const __dirname = fileURLToPath(new URL('.', import.meta.url))
 
-import { numberRegex } from '../shared/index.js'
-import { isNumberAdjacentToSymbol } from './utils.js'
+import { getNeighboursNumbers } from './utils.js'
 
 let input = ''
 
@@ -18,10 +17,9 @@ fs.readFile(path.join(__dirname, './input.txt'), {}, (err, data) => {
     for (let y = 0; y < str.length; y++) {
       const char = str[y]
       if (char == '*') {
-        const [num1, num2] = getNeighboursNumbers(string, x, y)
-        const gear = num1 * num2
+        const gear = getNeighboursNumbers(strings, x, y)
+        res += gear
       }
-      res += gear
     }
   }
 
