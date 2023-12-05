@@ -1,4 +1,4 @@
-import { specialSymbolRegex } from '../shared/index.js'
+import { specialSymbolRegex, numberRegex } from '../shared/index.js'
 
 export function isNumberAdjacentToSymbol(matrix, x, y1, y2) {
   let flag = false
@@ -39,4 +39,81 @@ export function isNumberAdjacentToSymbol(matrix, x, y1, y2) {
   }
 
   return flag
+}
+
+export function getNeighboursNumbers(matrix, x, y) {
+  const length = matrix[0].length
+  const height = matrix.length
+  if (x == 0 || x == height || y == 0 || y == length) {
+    return 0
+  }
+
+  const nums = []
+  // top-left
+  if (numberRegex.test(matrix[x - 1][y - 1])) {
+    // get number of neighbor
+    const number = +_getNumberOfNeighbor(matrix, x - 1, y - 1)
+    if (!nums.includes(number)) {
+      nums.push(number)
+    }
+  }
+  // top
+  if (numberRegex.test(matrix[x - 1][y])) {
+    const number = +_getNumberOfNeighbor(matrix, x - 1, y)
+    if (!nums.includes(number)) {
+      nums.push(number)
+    }
+  }
+  // top-right
+  if (numberRegex.test(matrix[x - 1][y + 1])) {
+    const number = +_getNumberOfNeighbor(matrix, x - 1, y + 1)
+    if (!nums.includes(number)) {
+      nums.push(number)
+    }
+  }
+  // left
+  if (numberRegex.test(matrix[x][y - 1])) {
+    const number = +_getNumberOfNeighbor(matrix, x, y - 1)
+    if (!nums.includes(number)) {
+      nums.push(number)
+    }
+  }
+  // rigth
+  if (numberRegex.test(matrix[x][y + 1])) {
+    const number = +_getNumberOfNeighbor(matrix, x, y + 1)
+    if (!nums.includes(number)) {
+      nums.push(number)
+    }
+  }
+  // bottom-left
+  if (numberRegex.test(matrix[x + 1][y - 1])) {
+    const number = +_getNumberOfNeighbor(matrix, x + 1, y - 1)
+    if (!nums.includes(number)) {
+      nums.push(number)
+    }
+  }
+  // bottom
+  if (numberRegex.test(matrix[x + 1][y])) {
+    const number = +_getNumberOfNeighbor(matrix, x + 1, y)
+    if (!nums.includes(number)) {
+      nums.push(number)
+    }
+  }
+  // bottom-right
+  if (numberRegex.test(matrix[x + 1][y + 1])) {
+    const number = +_getNumberOfNeighbor(matrix, x + 1, y + 1)
+    if (!nums.includes(number)) {
+      nums.push(number)
+    }
+  }
+
+  return nums.length === 2 ? nums[0] * nums[1] : 0
+}
+
+function _getNumberOfNeighbor(matrix, x, y) {
+  let l = y,
+    r = y
+  while (numberRegex.test(matrix[x][l])) l--
+  while (numberRegex.test(matrix[x][r])) r++
+  return matrix[x].slice(l + 1, r)
 }

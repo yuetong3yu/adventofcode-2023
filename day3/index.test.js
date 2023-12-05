@@ -1,4 +1,4 @@
-import { isNumberAdjacentToSymbol } from './utils.js'
+import { isNumberAdjacentToSymbol, getNeighboursNumbers } from './utils.js'
 
 const mock_data = [
   '467..114..',
@@ -28,5 +28,15 @@ describe('isNumberAdjacentToSymbol', () => {
 
   test('58 in mock data should be false', () => {
     expect(isNumberAdjacentToSymbol(mock_data, 5, 7, 9)).toBe(false)
+  })
+})
+
+describe('getNeighboursNumbers', () => {
+  test('should return the correct sum 1', () => {
+    expect(getNeighboursNumbers(mock_data, 1, 3)).toBe(16345)
+  })
+
+  test('should return the correct sum 2', () => {
+    expect(getNeighboursNumbers(mock_data, 8, 5)).toBe(451490)
   })
 })
