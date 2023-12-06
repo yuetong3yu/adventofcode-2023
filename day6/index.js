@@ -7,7 +7,7 @@ import { timesToDistance } from './utils.js'
 
 let input = ''
 
-fs.readFile(path.join(__dirname, './input.txt'), {}, (err, data) => {
+fs.readFile(path.join(__dirname, './sample.txt'), {}, (err, data) => {
   input += data.toString()
   const strings = input.split('\n')
 
@@ -36,5 +36,5 @@ fs.readFile(path.join(__dirname, './input.txt'), {}, (err, data) => {
     )
   }
 
-  console.log(res.reduce((prev, cur) => prev * cur, 1))
+  // console.log(res.reduce((prev, cur) => prev * cur, 1))
 })
