@@ -21,20 +21,23 @@ const DIRECTION_MAP = {
   R: 'right',
 }
 
-export function getStepsByMapAndInstructions(map, instructions) {
-  const keys = Object.keys(map)
-  const destination_key = keys[keys.length - 1]
-  const start_key = keys[0]
+const START_KEY = 'AAA',
+  END_KEY = 'ZZZ'
 
+export function getStepsByMapAndInstructions(map, instructions) {
   let count = 0,
-    current_key = start_key,
-    idx = 0
-  while (current_key != destination_key) {
+    current_key = START_KEY,
+    idx = 0,
+    record = ''
+  while (current_key != END_KEY) {
     count++
-    const direction = DIRECTION_MAP[instructions[idx++]]
-    if (idx == instructions.length - 1) idx = 0
+    const direction = DIRECTION_MAP[instructions[idx]]
+    record += instructions[idx]
+    idx++
+    if (idx == instructions.length) {
+      idx = 0
+    }
     current_key = map[current_key][direction]
-    console.log(direction, current_key)
   }
 
   return count
