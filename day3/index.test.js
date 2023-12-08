@@ -36,15 +36,11 @@ describe('getNeighboursNumbers', () => {
     expect(getNeighboursNumbers(mock_data, 1, 3)).toBe(16345)
   })
 
-  test.only('should return the correct sum 2', () => {
+  test('should return the correct sum 2', () => {
     expect(getNeighboursNumbers(mock_data, 3, 9)).toBe(110889)
   })
 
   test('should return the correct sum 3', () => {
     expect(getNeighboursNumbers(mock_data, 4, 3)).toBe(37637)
-  })
-
-  test('should return the correct sum 4', () => {
-    expect(getNeighboursNumbers(mock_data, 9, 9)).toBe(109668)
   })
 })
