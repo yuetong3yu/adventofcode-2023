@@ -8,4 +8,16 @@ export function getStartPoint(matrix) {
   }
 }
 
+export function getResultFromStartPoint(matrix, point, direction_from) {}
+
 export function isThisPointConnected(matrix, point, from) {}
+
+export function getTargetPoint(matrix, point, direction) {
+  if (direction === 'top') return matrix[point[0] - 1][point[1]]
+
+  if (direction === 'left') return matrix[point[0]][point[1] - 1]
+
+  if (direction === 'bottom') return matrix[point[0] + 1][point[1]]
+
+  if (direction === 'right') return matrix[point[0]][point[1] + 1]
+}
